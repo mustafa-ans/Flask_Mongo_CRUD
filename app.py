@@ -2,6 +2,17 @@ import pymongo
 from flask import Flask, Response, request
 import json
 from bson.objectid import ObjectId
+import os
+
+
+# mongo uri for env variable
+try:
+    mongo_uri = os.environ["MONGO_URI"]
+    mongo = pymongo.MongoClient(mongo_uri, serverSelectionTimeoutMS=1000)
+except:
+    print("Error - connection error to db")
+
+
 app = Flask(__name__)
 
 try:

@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:4.4.9-bionic
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - '80:80'
+    environment:
+      MONGO_URI: 'mongodb://root:example@mongo:27017'
